@@ -17,8 +17,8 @@ public class Drive {
 
     public void inti(HardwareMap hwmap){
 
-        leftFront = hwmap.get(DcMotor.class,"frontLeft");
-        leftBack = hwmap.get(DcMotor.class,"backLeft");
+        leftFront = hwmap.get(DcMotor.class,"frontleft");
+        leftBack = hwmap.get(DcMotor.class,"backleft");
         rightFront = hwmap.get(DcMotor.class,"frontRight");
         rightBack = hwmap.get(DcMotor.class,"backRight");
 
