@@ -10,7 +10,7 @@ public class TeleOP extends OpMode {
     Drive drive = new Drive();
     @Override
     public void init() {
-        drive.inti(hardwareMap);
+        drive.init(hardwareMap);
     }
 
 
