@@ -7,7 +7,6 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
-import org.opencv.core.DMatch;
 
 public class Drive {
 
@@ -15,10 +14,10 @@ public class Drive {
 
     IMU imu;
 
-    public void inti(HardwareMap hwmap){
+    public void init(HardwareMap hwmap){
 
-        leftFront = hwmap.get(DcMotor.class,"frontleft");
-        leftBack = hwmap.get(DcMotor.class,"backleft");
+        leftFront = hwmap.get(DcMotor.class,"frontLeft");
+        leftBack = hwmap.get(DcMotor.class,"backLeft");
         rightFront = hwmap.get(DcMotor.class,"frontRight");
         rightBack = hwmap.get(DcMotor.class,"backRight");
 
@@ -32,9 +31,9 @@ public class Drive {
 
         imu = hwmap.get(IMU.class,"imu");
         RevHubOrientationOnRobot.LogoFacingDirection logoDirection =
-                RevHubOrientationOnRobot.LogoFacingDirection.UP;
+                RevHubOrientationOnRobot.LogoFacingDirection.RIGHT;
         RevHubOrientationOnRobot.UsbFacingDirection usbDirection =
-                RevHubOrientationOnRobot.UsbFacingDirection.FORWARD;
+                RevHubOrientationOnRobot.UsbFacingDirection.BACKWARD;
 
         RevHubOrientationOnRobot orientationOnRobot = new
                 RevHubOrientationOnRobot(logoDirection, usbDirection);
