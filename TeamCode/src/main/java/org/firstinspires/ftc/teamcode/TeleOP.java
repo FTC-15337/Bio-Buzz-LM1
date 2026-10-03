@@ -10,29 +10,32 @@ import java.security.InvalidKeyException;
 
 @TeleOp
 public class TeleOP extends OpMode {
-    Drive drive = new Drive();
+//    Drive drive = new Drive();
     Intake intake = new Intake();
     @Override
     public void init() {
-        drive.init(hardwareMap);
+//        drive.init(hardwareMap);
         intake.init(hardwareMap);
     }
 
 
     @Override
     public void loop() {
-        if (gamepad1.a){
-            drive.Reset();
-        }
+//        if (gamepad1.a){
+//            drive.Reset();
+//        }
 
         if (gamepad1.b){
-            intake.intakeSpeed(0.75);
+            intake.intakeSpeed(0.1);
+        }
+        else {
+            intake.intakeSpeed(0);
         }
 
-        double forward, strafe, rotate;
-        forward = -gamepad1.left_stick_y;
-        strafe = gamepad1.left_stick_x;
-        rotate = gamepad1.right_stick_x;
-        drive.driveFieldRelative(forward,strafe,rotate);
+//        double forward, strafe, rotate;
+//        forward = -gamepad1.left_stick_y;
+//        strafe = gamepad1.left_stick_x;
+//        rotate = gamepad1.right_stick_x;
+//        drive.driveFieldRelative(forward,strafe,rotate);
     }
 }

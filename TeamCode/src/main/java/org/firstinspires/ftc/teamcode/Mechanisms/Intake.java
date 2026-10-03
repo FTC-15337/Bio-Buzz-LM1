@@ -10,6 +10,7 @@ public class Intake {
     public void init(HardwareMap hwmap){
         intake = hwmap.get(DcMotor.class,"intake");
         intake.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        intake.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
 
 
@@ -17,4 +18,7 @@ public class Intake {
     public void intakeSpeed(double speed){
         intake.setPower(speed);
     }
-}
+
+
+    }
+
