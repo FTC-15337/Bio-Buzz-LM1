@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Mechanisms;
+package org.firstinspires.ftc.teamcode.Outreach;
 
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.IMU;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.opencv.core.DMatch;
 
-public class Drive {
+public class OutreachDriveIntake {
 
     private DcMotor leftFront, leftBack, rightFront, rightBack;
 
@@ -17,18 +17,18 @@ public class Drive {
 
     public void inti(HardwareMap hwmap){
 
-        leftFront = hwmap.get(DcMotor.class,"frontLeft");
+//        leftFront = hwmap.get(DcMotor.class,"frontLeft");
         leftBack = hwmap.get(DcMotor.class,"backLeft");
         rightFront = hwmap.get(DcMotor.class,"frontRight");
         rightBack = hwmap.get(DcMotor.class,"backRight");
 
-        leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
+//        leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
         leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        leftBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        leftFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        rightBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        rightFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        leftBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        leftFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         imu = hwmap.get(IMU.class,"imu");
         RevHubOrientationOnRobot.LogoFacingDirection logoDirection =
@@ -51,16 +51,16 @@ public class Drive {
         double backLeftPower = forward - right + rotate;
 
         double maxPower = 1.0;
-        double maxSpeed = 1.0;  //  slower for outreaches
+        double maxSpeed = 0.5;  //  slower for outreaches
 
 
-        maxPower = Math.max(maxPower, Math.abs(frontLeftPower));
+//        maxPower = Math.max(maxPower, Math.abs(frontLeftPower));
         maxPower = Math.max(maxPower, Math.abs(frontRightPower));
         maxPower = Math.max(maxPower, Math.abs(backRightPower));
-        maxPower = Math.max(maxPower, Math.abs(backLeftPower));
+        maxPower = Math.max(0.71, Math.abs(backLeftPower));
 
 
-        leftFront.setPower(maxSpeed * (frontLeftPower / maxPower));
+//        leftFront.setPower(maxSpeed * (frontLeftPower / maxPower));
         rightFront.setPower(maxSpeed * (frontRightPower / maxPower));
         leftBack.setPower(maxSpeed * (backLeftPower / maxPower));
         rightBack.setPower(maxSpeed * (backRightPower / maxPower));

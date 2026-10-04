@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Mechanisms;
+package org.firstinspires.ftc.teamcode.Outreach;
 
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.IMU;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.opencv.core.DMatch;
 
-public class Drive {
+public class OutreachDrive {
 
     private DcMotor leftFront, leftBack, rightFront, rightBack;
 
@@ -51,7 +51,7 @@ public class Drive {
         double backLeftPower = forward - right + rotate;
 
         double maxPower = 1.0;
-        double maxSpeed = 1.0;  //  slower for outreaches
+        double maxSpeed = 0.5;  //  slower for outreaches
 
 
         maxPower = Math.max(maxPower, Math.abs(frontLeftPower));
@@ -60,10 +60,10 @@ public class Drive {
         maxPower = Math.max(maxPower, Math.abs(backLeftPower));
 
 
-        leftFront.setPower(maxSpeed * (frontLeftPower / maxPower));
-        rightFront.setPower(maxSpeed * (frontRightPower / maxPower));
-        leftBack.setPower(maxSpeed * (backLeftPower / maxPower));
-        rightBack.setPower(maxSpeed * (backRightPower / maxPower));
+        leftFront.setPower(maxPower * (frontLeftPower / maxPower));
+        rightFront.setPower(maxPower * (frontRightPower / maxPower));
+        leftBack.setPower(maxPower * (backLeftPower / maxPower));
+        rightBack.setPower(maxPower * (backRightPower / maxPower));
 
 
     }
