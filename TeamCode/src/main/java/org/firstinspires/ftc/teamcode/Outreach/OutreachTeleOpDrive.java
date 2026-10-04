@@ -10,13 +10,16 @@ public class OutreachTeleOpDrive extends OpMode {
     OutreachDrive drive = new OutreachDrive();
 
     @Override
-    public void init(){drive.inti(hardwareMap);}
+    public void init(){
+        drive.inti(hardwareMap);
+    }
 
     @Override
     public void loop() {
         if (gamepad1.a) {
             drive.Reset();
         }
+
 
         double forward, strafe, rotate;
         forward = -gamepad1.left_stick_y;

@@ -1,13 +1,14 @@
 package org.firstinspires.ftc.teamcode.Mechanisms;
 
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
-import org.opencv.core.DMatch;
 
 public class Drive {
 
@@ -15,7 +16,7 @@ public class Drive {
 
     IMU imu;
 
-    public void inti(HardwareMap hwmap){
+    public void init(HardwareMap hwmap){
 
         leftFront = hwmap.get(DcMotor.class,"frontLeft");
         leftBack = hwmap.get(DcMotor.class,"backLeft");
@@ -85,5 +86,35 @@ public class Drive {
     }
     public void Reset(){
         imu.resetYaw();
+    }
+
+    @TeleOp(name = "Teleop")
+    public static class TeleOP extends OpMode {
+        DcMotor intake;
+        Drive drive = new Drive();
+        @Override
+        public void init() {
+            intake.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            drive.init(hardwareMap);
+        }
+
+
+        @Override
+        public void loop() {
+            if (gamepad1.a){
+                drive.Reset();
+            }
+
+            if (gamepad1.left_bumper) {
+                intake.setPower(0.75);
+            } else {
+                intake.setPower(0);
+            }
+            double forward, strafe, rotate;
+            forward = -gamepad1.left_stick_y;
+            strafe = gamepad1.left_stick_x;
+            rotate = gamepad1.right_stick_x;
+            drive.driveFieldRelative(forward,strafe,rotate);
+        }
     }
 }
