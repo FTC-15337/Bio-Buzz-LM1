@@ -44,8 +44,7 @@ public class Drive {
 
 
     public void drive (double forward, double right, double rotate) {
-        // This calculates the power needed for each wheel based on the amount of forward,
-        // strafe right, and rotate
+
         double frontLeftPower = forward + right + rotate;
         double frontRightPower = forward - right - rotate;
         double backRightPower = forward + right - rotate;
@@ -88,33 +87,5 @@ public class Drive {
         imu.resetYaw();
     }
 
-    @TeleOp(name = "Teleop")
-    public static class TeleOP extends OpMode {
-        DcMotor intake;
-        Drive drive = new Drive();
-        @Override
-        public void init() {
-            intake.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-            drive.init(hardwareMap);
-        }
 
-
-        @Override
-        public void loop() {
-            if (gamepad1.a){
-                drive.Reset();
-            }
-
-            if (gamepad1.left_bumper) {
-                intake.setPower(0.75);
-            } else {
-                intake.setPower(0);
-            }
-            double forward, strafe, rotate;
-            forward = -gamepad1.left_stick_y;
-            strafe = gamepad1.left_stick_x;
-            rotate = gamepad1.right_stick_x;
-            drive.driveFieldRelative(forward,strafe,rotate);
-        }
-    }
 }
