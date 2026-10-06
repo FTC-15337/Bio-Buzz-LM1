@@ -16,7 +16,7 @@ public class Intake {
 
 
 
-    public void intakeSpeed(double speed){
+    public void intakeSpeed(double speed) {
         intake.setPower(speed);
     }
 
