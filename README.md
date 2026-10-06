@@ -444,7 +444,7 @@ voltage was not updated on driver station if OpMode did not send any telemetry.
 ### Bug Fixes
 * Fixes a bug which prevented PlayStation gamepads from being used in bluetooth mode. Bluetooth is NOT legal for competition but may be useful to allow a DS device to be used while charging, or at an outreach event.
 * Fixes a bug where a Blocks OpMode's Date Modified value can change to December 31, 1969, if the Control Hub is rebooted while the Blocks OpMode is being edited.
-* Fixes the automatic TeleOp preselection feature (was broken in 8.2)
+* Fixes the automatic TeleOpOutReach preselection feature (was broken in 8.2)
 * Fixes a bug where passing an integer number such as 123 to the Telemetry.addData block that takes a number shows up as 123.0 in the telemetry.
 * Fixes OnBotJava autocomplete issues:
   * Autocomplete would incorrectly provide values for the current class when autocompleting a local variable
@@ -805,7 +805,7 @@ This is a bug fix only release to address the following four issues.
 * Fixes [ftc_app issue 673](https://github.com/ftctechnh/ftc_app/issues/673) Latest matchlog is being deleted instead of old ones by RobotLog
 * Fixes ConceptVuforiaUltimateGoalNavigationWebcam sample opmode by correctly orienting camera on robot.
 * Fixes issue where logcat would be spammed with InterruptedExceptions when stop is requested from the Driver Station (this behavior was accidentally introduced in v5.3). This change has no impact on functionality.
-* Fixes issue where the blocks editor fails to load if the name of any TeleOp opmode contains an apostrophe.
+* Fixes issue where the blocks editor fails to load if the name of any TeleOpOutReach opmode contains an apostrophe.
 
 ## Version 6.1 (20201209-113742)
 * Makes the scan button on the configuration screen update the list of Expansion Hubs connected via RS-485
@@ -820,7 +820,7 @@ This is a bug fix only release to address the following four issues.
 * Adds support for the Control Hub OS 1.1.2 Robot Controller watchdog
     * The Robot Controller app will be restarted if it stops responding for more than 10 seconds
 * Adds support for using the Driver Station app on Android 10+
-* Introduces an automatic TeleOp preselection feature
+* Introduces an automatic TeleOpOutReach preselection feature
     * For details and usage guide, please see [this wiki entry](https://github.com/FIRST-Tech-Challenge/FtcRobotController/wiki/Automatically-Loading-a-Driver-Controlled-Op-Mode)
 * Shows icon next to OpMode name in the OpMode list dropdown on the Driver Station to indicate the source of the OpMode (i.e. the programming tool used to create it)
 * Fixes issue where the Driver Station app would exit after displaying the Configuring Wi-Fi Direct screen
@@ -1259,7 +1259,7 @@ Changes include:
     - Added an external sample OpMode that demonstrates localization using 2018-2019 (Rover Ruckus presented by QualComm) Vuforia targets.
     - Added an external sample OpMode that demonstrates how to use the REV Robotics 2m Laser Distance Sensor.
     - Added an external sample OpMode that demonstrates how to use the REV Robotics Blinkin LED Controller.
-    - Re-categorized external Java sample OpModes to "TeleOp" instead of "Autonomous".
+    - Re-categorized external Java sample OpModes to "TeleOpOutReach" instead of "Autonomous".
 
 Known issues:
  * Initial support for UVC compatible cameras
@@ -1530,7 +1530,7 @@ Changes include:
      - Added logging when a blocks file is read/written.
      - Fixed bug to properly render blocks even if missing devices from configuration file.
      - Added support for additional characters (not just alphanumeric) for the block file names (for download and upload).
-     - Added support for OpMode flavor (“Autonomous” or “TeleOp”) and group.
+     - Added support for OpMode flavor (“Autonomous” or “TeleOpOutReach”) and group.
   * Changes to Samples to prevent tutorial issues.
   * Incorporated suggested changes from public pull 216 (“Replace .. paths”).
   * Remove Servo Glitches when robot stopped.

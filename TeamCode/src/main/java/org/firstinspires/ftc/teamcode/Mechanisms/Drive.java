@@ -16,12 +16,12 @@ public class Drive {
 
     IMU imu;
 
-    public void init(HardwareMap hwmap){
+    public void init(HardwareMap hwmap) {
 
-        leftFront = hwmap.get(DcMotor.class,"frontLeft");
-        leftBack = hwmap.get(DcMotor.class,"backLeft");
-        rightFront = hwmap.get(DcMotor.class,"frontRight");
-        rightBack = hwmap.get(DcMotor.class,"backRight");
+        leftFront = hwmap.get(DcMotor.class, "frontLeft");
+        leftBack = hwmap.get(DcMotor.class, "backLeft");
+        rightFront = hwmap.get(DcMotor.class, "frontRight");
+        rightBack = hwmap.get(DcMotor.class, "backRight");
 
         leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
         leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -31,7 +31,12 @@ public class Drive {
         rightBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rightFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-        imu = hwmap.get(IMU.class,"imu");
+        leftBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        imu = hwmap.get(IMU.class, "imu");
         RevHubOrientationOnRobot.LogoFacingDirection logoDirection =
                 RevHubOrientationOnRobot.LogoFacingDirection.LEFT;
         RevHubOrientationOnRobot.UsbFacingDirection usbDirection =
@@ -43,7 +48,7 @@ public class Drive {
     }
 
 
-    public void drive (double forward, double right, double rotate) {
+    public void drive(double forward, double right, double rotate) {
         // This calculates the power needed for each wheel based on the amount of forward,
         // strafe right, and rotate
         double frontLeftPower = forward + right + rotate;
@@ -84,37 +89,9 @@ public class Drive {
 
         drive(newForward, newRight, rotate);
     }
-    public void Reset(){
+
+    public void Reset() {
         imu.resetYaw();
     }
 
-    @TeleOp(name = "Teleop")
-    public static class TeleOP extends OpMode {
-        DcMotor intake;
-        Drive drive = new Drive();
-        @Override
-        public void init() {
-            intake.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-            drive.init(hardwareMap);
-        }
-
-
-        @Override
-        public void loop() {
-            if (gamepad1.a){
-                drive.Reset();
-            }
-
-            if (gamepad1.left_bumper) {
-                intake.setPower(0.75);
-            } else {
-                intake.setPower(0);
-            }
-            double forward, strafe, rotate;
-            forward = -gamepad1.left_stick_y;
-            strafe = gamepad1.left_stick_x;
-            rotate = gamepad1.right_stick_x;
-            drive.driveFieldRelative(forward,strafe,rotate);
-        }
-    }
 }

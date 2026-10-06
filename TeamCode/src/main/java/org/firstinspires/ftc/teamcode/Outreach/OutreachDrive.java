@@ -15,7 +15,7 @@ public class OutreachDrive {
 
     IMU imu;
 
-    public void inti(HardwareMap hwmap){
+    public void init(HardwareMap hwmap){
 
         leftFront = hwmap.get(DcMotor.class,"frontLeft");
         leftBack = hwmap.get(DcMotor.class,"backLeft");
@@ -29,6 +29,11 @@ public class OutreachDrive {
         leftFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rightBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rightFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        leftBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         imu = hwmap.get(IMU.class,"imu");
         RevHubOrientationOnRobot.LogoFacingDirection logoDirection =

@@ -1,27 +1,26 @@
-package org.firstinspires.ftc.teamcode.Outreach;
+package org.firstinspires.ftc.teamcode.OpModes;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.DcMotor;
 
+import org.firstinspires.ftc.teamcode.Mechanisms.Drive;
 import org.firstinspires.ftc.teamcode.Mechanisms.Intake;
-import org.firstinspires.ftc.teamcode.Outreach.OutreachDrive;
 
 @TeleOp
-public class OutreachTeleOpDrive extends OpMode {
-    OutreachDrive drive = new OutreachDrive();
-
+public class IntakeTeleOp extends OpMode {
     Intake intake = new Intake();
-
+    Drive drive = new Drive();
     @Override
-    public void init(){
+    public void init() {
         intake.init(hardwareMap);
         drive.init(hardwareMap);
     }
 
+
     @Override
     public void loop() {
-        if (gamepad1.a) {
+        if (gamepad1.a){
             drive.Reset();
         }
 
@@ -30,7 +29,6 @@ public class OutreachTeleOpDrive extends OpMode {
         } else {
             intake.intakeSpeed(0);
         }
-
         double forward, strafe, rotate;
         forward = -gamepad1.left_stick_y;
         strafe = gamepad1.left_stick_x;
@@ -38,3 +36,4 @@ public class OutreachTeleOpDrive extends OpMode {
         drive.driveFieldRelative(forward,strafe,rotate);
     }
 }
+
